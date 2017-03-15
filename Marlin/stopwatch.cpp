@@ -24,54 +24,83 @@
 #include "stopwatch.h"
 
 Stopwatch::Stopwatch() {
-   this->reset();
- }
-
-void Stopwatch::stop() {
-  if (DEBUGGING(INFO)) SERIAL_ECHOLNPGM("Stopwatch::stop()");
-  if (!this->isRunning()) return;
-
-  this->status = STPWTCH_STOPPED;
-  this->stopTimestamp = millis();
+  this->reset();
 }
 
-void Stopwatch::pause() {
-  if (DEBUGGING(INFO)) SERIAL_ECHOLNPGM("Stopwatch::pause()");
-  if (!this->isRunning()) return;
+bool Stopwatch::stop() {
+  #if ENABLED(DEBUG_STOPWATCH)
+    Stopwatch::debug(PSTR("stop"));
+  #endif
 
-  this->status = STPWTCH_PAUSED;
-  this->stopTimestamp = millis();
+  if (this->isRunning() || this->isPaused()) {
+    this->state = STOPPED;
+    this->stopTimestamp = millis();
+    return true;
+  }
+  else return false;
 }
 
-void Stopwatch::start() {
-  if (DEBUGGING(INFO)) SERIAL_ECHOLNPGM("Stopwatch::start()");
-  if (this->isRunning()) return;
+bool Stopwatch::pause() {
+  #if ENABLED(DEBUG_STOPWATCH)
+    Stopwatch::debug(PSTR("pause"));
+  #endif
 
-  if (this->isPaused()) this->accumulator = this->duration();
-  else this->reset();
+  if (this->isRunning()) {
+    this->state = PAUSED;
+    this->stopTimestamp = millis();
+    return true;
+  }
+  else return false;
+}
 
-  this->status = STPWTCH_RUNNING;
-  this->startTimestamp = millis();
+bool Stopwatch::start() {
+  #if ENABLED(DEBUG_STOPWATCH)
+    Stopwatch::debug(PSTR("start"));
+  #endif
+
+  if (!this->isRunning()) {
+    if (this->isPaused()) this->accumulator = this->duration();
+    else this->reset();
+
+    this->state = RUNNING;
+    this->startTimestamp = millis();
+    return true;
+  }
+  else return false;
 }
 
 void Stopwatch::reset() {
-  if (DEBUGGING(INFO)) SERIAL_ECHOLNPGM("Stopwatch::reset()");
+  #if ENABLED(DEBUG_STOPWATCH)
+    Stopwatch::debug(PSTR("reset"));
+  #endif
 
-  this->status = STPWTCH_STOPPED;
+  this->state = STOPPED;
   this->startTimestamp = 0;
   this->stopTimestamp = 0;
   this->accumulator = 0;
 }
 
 bool Stopwatch::isRunning() {
-  return (this->status == STPWTCH_RUNNING) ? true : false;
+  return (this->state == RUNNING) ? true : false;
 }
 
 bool Stopwatch::isPaused() {
-  return (this->status == STPWTCH_PAUSED) ? true : false;
+  return (this->state == PAUSED) ? true : false;
 }
 
-uint16_t Stopwatch::duration() {
+millis_t Stopwatch::duration() {
   return (((this->isRunning()) ? millis() : this->stopTimestamp)
-          - this->startTimestamp) / 1000 + this->accumulator;
+          - this->startTimestamp) / 1000UL + this->accumulator;
 }
+
+#if ENABLED(DEBUG_STOPWATCH)
+
+  void Stopwatch::debug(const char func[]) {
+    if (DEBUGGING(INFO)) {
+      SERIAL_ECHOPGM("Stopwatch::");
+      serialprintPGM(func);
+      SERIAL_ECHOLNPGM("()");
+    }
+  }
+
+#endif
