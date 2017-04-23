@@ -891,10 +891,13 @@
 #if ENABLED(RGB_LED)
   #if !(PIN_EXISTS(RGB_LED_R) && PIN_EXISTS(RGB_LED_G) && PIN_EXISTS(RGB_LED_B))
     #error "RGB_LED requires RGB_LED_R_PIN, RGB_LED_G_PIN, and RGB_LED_B_PIN."
-  #elif ENABLED(BLINKM)
-    #error "RGB_LED and BLINKM are currently incompatible (both use M150)."
   #endif
 #endif
+
+#if ENABLED(RGB_LED) + ENABLED(BLINKM) + ENABLED(WS2812B) > 1
+  #error "At most one of RGB_LED, BLINKM, and WS2812B must be defined. All currently use M150."
+#endif
+
 
 /**
  * Auto Fan check for PWM pins

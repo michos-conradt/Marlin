@@ -259,6 +259,10 @@
   #include "Wire.h"
 #endif
 
+#if ENABLED(WS2812B)
+  #include "ws2812b.h"
+#endif
+
 #if HAS_SERVOS
   #include "servo.h"
 #endif
@@ -5246,7 +5250,7 @@ inline void gcode_M104() {
 
     if (code_value_temp_abs() > thermalManager.degHotend(target_extruder)) LCD_MESSAGEPGM(MSG_HEATING);
   }
-  
+
   #if ENABLED(AUTOTEMP)
     planner.autotemp_M104_M109();
   #endif
@@ -6106,13 +6110,14 @@ inline void gcode_M121() { endstops.enable_globally(false); }
   }
 #endif // HAVE_TMC2130DRIVER
 
-#if ENABLED(BLINKM) || ENABLED(RGB_LED)
+#if ENABLED(BLINKM) || ENABLED(RGB_LED) || ENABLED(WS2812B)
 
   void set_led_color(const uint8_t r, const uint8_t g, const uint8_t b) {
 
-    #if ENABLED(BLINKM)
+    #if ENABLED(BLINKM) || ENABLED(WS2812B)
 
-      // This variant uses i2c to send the RGB components to the device.
+      // This variant uses i2c or one wire serial to send the RGB components to
+      // the device.
       SendColors(r, g, b);
 
     #else

@@ -39,10 +39,14 @@
 
 #define LARGE_FLASH true
 
+//#define SERVO0_PIN         11
+//#define SERVO1_PIN          6
+//#define SERVO2_PIN          5
+//#define SERVO3_PIN          4
 #define SERVO0_PIN         11
-#define SERVO1_PIN          6
-#define SERVO2_PIN          5
-#define SERVO3_PIN          4
+#define SERVO1_PIN         6
+#define SERVO2_PIN         5
+#define SERVO3_PIN         4
 
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
@@ -82,7 +86,7 @@
 
 #if ENABLED(Z_MIN_PROBE_ENDSTOP)
   // Define a pin to use as the signal pin on Arduino for the Z_PROBE endstop.
-  #define Z_MIN_PROBE_PIN  57
+  #define Z_MIN_PROBE_PIN  1
 #endif
 
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
@@ -101,7 +105,7 @@
   #define FAN_PIN           4 // IO pin. Buffer needed
 #endif*/
 
-#define FAN_PIN            58
+#define FAN_PIN            66  // A12
 
 #define PS_ON_PIN          12
 
@@ -113,17 +117,7 @@
 
 #define HEATER_0_PIN 9
 
-//#if MB(RAMPS_13_EFF)
-//  #define HEATER_0_PIN      8
-//#else
-//  #define HEATER_0_PIN     10   // EXTRUDER 1
-//#endif
-
-#if MB(RAMPS_13_SF) || ENABLED(IS_RAMPS_EFB)
-  #define HEATER_1_PIN     -1
-#else
-  #define HEATER_1_PIN      9   // EXTRUDER 2 (FAN On Sprinter)
-#endif
+#define HEATER_1_PIN     -1
 
 #define HEATER_2_PIN       -1
 
@@ -131,11 +125,7 @@
 #define TEMP_1_PIN         15   // ANALOG NUMBERING
 #define TEMP_2_PIN         -1   // ANALOG NUMBERING
 
-#if MB(RAMPS_13_EFF) || MB(RAMPS_13_EEF) || MB(RAMPS_13_SF)
-  #define HEATER_BED_PIN   -1    // NO BED
-#else
-  #define HEATER_BED_PIN    8    // BED
-#endif
+#define HEATER_BED_PIN    8    // BED
 
 #define TEMP_BED_PIN         14   // ANALOG NUMBERING
 
@@ -275,3 +265,6 @@
 #else
   #define MAX6675_SS       66 // Do not use pin 49 as this is tied to the switch inside the SD card socket to detect if there is an SD card present
 #endif
+
+#define STAT_LED_BLUE_PIN  64    // A10
+#define STAT_LED_RED_PIN   40
