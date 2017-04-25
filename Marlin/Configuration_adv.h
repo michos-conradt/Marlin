@@ -190,7 +190,7 @@
 //it will turn on when any driver is enabled
 //and turn off after the set amount of seconds from last driver being disabled again
 #define CONTROLLERFAN_PIN 65  // A11
-#define CONTROLLERFAN_SECS 30 //How many seconds, after all motors were disabled, the fan should run
+#define CONTROLLERFAN_SECS 60 //How many seconds, after all motors were disabled, the fan should run
 #define CONTROLLERFAN_SPEED 255
 
 // When first starting the main fan, run it at full speed for the
@@ -218,14 +218,14 @@
  * the fan will turn on when any selected extruder is above the threshold.
  */
 #define E0_AUTO_FAN_PIN 42
-#define E1_AUTO_FAN_PIN -1
+#define E1_AUTO_FAN_PIN 44
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
 #define EXTRUDER_AUTO_FAN_TEMPERATURE 50
 #define EXTRUDER_AUTO_FAN_SPEED   255  // == full speed
 
 // Define a pin to turn case light on/off
-#define CASE_LIGHT_PIN 44
+#define CASE_LIGHT_PIN 40
 #if PIN_EXISTS(CASE_LIGHT)
   #define INVERT_CASE_LIGHT false   // Set to true if HIGH is the OFF state (active low)
   //#define CASE_LIGHT_DEFAULT_ON   // Uncomment to set default state to on

@@ -20,29 +20,12 @@
  *
  */
 
-/**
- * Arduino Mega with RAMPS v1.3 pin assignments
- *
- * Applies to the following boards:
- *
- *  RAMPS_13_EFB (Extruder, Fan, Bed)
- *  RAMPS_13_EEB (Extruder, Extruder, Bed)
- *  RAMPS_13_EFF (Extruder, Fan, Fan)
- *  RAMPS_13_EEF (Extruder, Extruder, Fan)
- *  RAMPS_13_SF  (Spindle, Controller Fan)
- *
- */
-
 #if !defined(__AVR_ATmega1280__) && !defined(__AVR_ATmega2560__)
   #error Oops!  Make sure you have 'Arduino Mega' selected from the 'Tools -> Boards' menu.
 #endif
 
 #define LARGE_FLASH true
 
-//#define SERVO0_PIN         11
-//#define SERVO1_PIN          6
-//#define SERVO2_PIN          5
-//#define SERVO3_PIN          4
 #define SERVO0_PIN         11
 #define SERVO1_PIN         6
 #define SERVO2_PIN         5
@@ -94,18 +77,8 @@
   #define FILRUNOUT_PIN     4
 #endif
 
-/*#if MB(RAMPS_13_EFF) || ENABLED(IS_RAMPS_EFB)
-  #define FAN_PIN           57 // (Sprinter config)
-  #if MB(RAMPS_13_EFF)
-    #define CONTROLLERFAN_PIN  -1 // Pin used for the fan to cool controller
-  #endif
-#elif MB(RAMPS_13_EEF) || MB(RAMPS_13_SF)
-  #define FAN_PIN           8
-#else
-  #define FAN_PIN           4 // IO pin. Buffer needed
-#endif*/
-
 #define FAN_PIN            66  // A12
+#define CONTROLLERFAN_PIN  65  // A11
 
 #define PS_ON_PIN          12
 
@@ -115,19 +88,15 @@
   #define KILL_PIN         -1
 #endif
 
-#define HEATER_0_PIN 9
-
-#define HEATER_1_PIN     -1
-
+#define HEATER_0_PIN        9
+#define HEATER_1_PIN       10
 #define HEATER_2_PIN       -1
+#define HEATER_BED_PIN      8    // BED
 
 #define TEMP_0_PIN         13   // ANALOG NUMBERING
 #define TEMP_1_PIN         15   // ANALOG NUMBERING
 #define TEMP_2_PIN         -1   // ANALOG NUMBERING
-
-#define HEATER_BED_PIN    8    // BED
-
-#define TEMP_BED_PIN         14   // ANALOG NUMBERING
+#define TEMP_BED_PIN       14   // ANALOG NUMBERING
 
 #if ENABLED(Z_PROBE_SLED)
   #define SLED_PIN           -1
@@ -266,5 +235,5 @@
   #define MAX6675_SS       66 // Do not use pin 49 as this is tied to the switch inside the SD card socket to detect if there is an SD card present
 #endif
 
-#define STAT_LED_BLUE_PIN  64    // A10
-#define STAT_LED_RED_PIN   40
+#define STAT_LED_BLUE_PIN  63    // A9
+#define STAT_LED_RED_PIN   64    // A10
