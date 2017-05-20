@@ -63,13 +63,13 @@
 
 #if ENABLED(FILAMENT_SENSOR)  // FMM added for Filament Extruder
   // define analog pin for the filament width sensor input
-  // Use the RAMPS 1.4 Analog input 5 on the AUX2 connector
-  #define FILWIDTH_PIN      5
+  // Use the RAMPS 1.4 Analog input 4 on the AUX1 connector
+  #define FILWIDTH_PIN      4
 #endif
 
 #if ENABLED(Z_MIN_PROBE_ENDSTOP)
   // Define a pin to use as the signal pin on Arduino for the Z_PROBE endstop.
-  #define Z_MIN_PROBE_PIN  1
+  #define Z_MIN_PROBE_PIN  57  // A3 (on Aux 1)
 #endif
 
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
