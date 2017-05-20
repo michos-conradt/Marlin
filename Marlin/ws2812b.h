@@ -28,4 +28,4 @@
 #include "Arduino.h"
 #include "Wire.h"
 
-void SendColors(byte red, byte grn, byte blu);
+void set_led_color(byte red, byte grn, byte blu);

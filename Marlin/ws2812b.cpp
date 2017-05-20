@@ -34,7 +34,7 @@
 
 Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, WS2812B_PIN, NEO_GRB + NEO_KHZ800);
 
-void SendColors(byte red, byte green, byte blue) {
+void set_led_color(byte red, byte green, byte blue) {
   pixel.setPixelColor(0, pixel.Color(red, green, blue));
   pixel.show();
 }

@@ -6922,11 +6922,9 @@ inline void gcode_M109() {
           const uint8_t red = map(constrain(temp, start_temp, target_temp), start_temp, target_temp, 0, 255);
           if (red != old_red) set_led_color((old_red = red), 0, 255);
         }
-      }
       #endif
 
       #if TEMP_BED_RESIDENCY_TIME > 0
-
         const float temp_diff = fabs(target_temp - temp);
 
         if (!residency_start_ms) {
@@ -6937,7 +6935,6 @@ inline void gcode_M109() {
           // Restart the timer whenever the temperature falls outside the hysteresis.
           residency_start_ms = now;
         }
-
       #endif // TEMP_BED_RESIDENCY_TIME > 0
 
       // Prevent a wait-forever situation if R is misused i.e. M190 R0

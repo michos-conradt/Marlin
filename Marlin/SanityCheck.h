@@ -988,6 +988,7 @@ static_assert(1 >= 0
   #elif ENABLED(BLINKM)
     #error "RGBW_LED and BLINKM are currently incompatible (both use M150)."
   #endif
+#elif ENABLED(WS2812B)
 #elif DISABLED(BLINKM) && ENABLED(PRINTER_EVENT_LEDS)
   #error "PRINTER_EVENT_LEDS requires BLINKM, RGB_LED, or RGBW_LED."
 #endif

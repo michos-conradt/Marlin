@@ -67,18 +67,13 @@
   #define FILWIDTH_PIN      4
 #endif
 
-#if ENABLED(Z_MIN_PROBE_ENDSTOP)
-  // Define a pin to use as the signal pin on Arduino for the Z_PROBE endstop.
-  #define Z_MIN_PROBE_PIN  57  // A3 (on Aux 1)
-#endif
-
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   // define digital pin 4 for the filament runout sensor. Use the RAMPS 1.4 digital input 4 on the servos connector
   #define FILRUNOUT_PIN     4
 #endif
 
 #define FAN_PIN            66  // A12
-#define CONTROLLERFAN_PIN  65  // A11
+#define CONTROLLER_FAN_PIN 65  // A11
 
 #define PS_ON_PIN          12
 
